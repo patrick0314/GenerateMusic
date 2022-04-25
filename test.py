@@ -29,8 +29,8 @@ plt.close()
 n_bytes = 2
 wave_data = (2**15-1) * wave_data
 wave_data = wave_data.astype(np.int16)
-#play_obj = sa.play_buffer(wave_data, n_channel, n_bytes, fs)
-#play_obj.wait_done()
+play_obj = sa.play_buffer(wave_data, n_channel, n_bytes, fs)
+play_obj.wait_done()
 
 # 製作音檔
 f = wave.open('test-copy.wav', 'wb')
