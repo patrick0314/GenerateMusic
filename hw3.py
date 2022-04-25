@@ -54,8 +54,10 @@ def getmusic(score, beat, name, key, unit_beat, volume, play):
 
     # Play Music
     if play:
+        print('=== Play Music ===')
         play_obj = sa.play_buffer(music, 1, 2, fs)
         play_obj.wait_done()
+        print('=== Play Done ===')
 
     # Save
     if name:
@@ -65,6 +67,7 @@ def getmusic(score, beat, name, key, unit_beat, volume, play):
         f.setframerate(fs)
         f.writeframes(music.tobytes())
         f.close()
+        print('=== Save {}.wav file ==='.format(name))
 
 if __name__ == '__main__':
     # =========================================================================
