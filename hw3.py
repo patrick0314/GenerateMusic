@@ -47,10 +47,10 @@ def getmusic(score, beat, name, key=0, unit_beat=1, fs=44100):
     '''
 
     '''
-    '''
     # Play Music
     play_obj = sa.play_buffer(music, 1, 2, fs)
     play_obj.wait_done()
+    '''
 
     f = wave.open(name+'.wav', 'wb')
     f.setnchannels(2)
@@ -68,8 +68,21 @@ if __name__ == '__main__':
     #   getmusic(score, beat, name) # Generate the music file 'twinkle.wav'
     # =========================================================================
 
-    score = [-1, -1, -5, -5, -6, -6, -5, -4, -4, -3, -3, -2, -2, -1]
-    score *= -1
-    beat = [1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2]
-    name = 'twinkle'
+    print('\n =========================================================================')
+    print(' Basic Function:')
+    print('   score = [1, 1, 5, 5, 6, 6, 5] # 1:Do, 2:Re, 3:Mi ...')
+    print('   beat = [1, 1, 1, 1, 1, 1, 2] # 拍子')
+    print('   name = \'twinkle\'')
+    print('   getmusic(score, beat, name) # Generate the music file \'twinkle.wav\'')
+    print(' Advanced Function:')
+    print('   score -1:低音Do, -2:低音Re, -3:低音Mi, ...')
+    print('   score 8:高音Do, 9:高音Re, 10:高音Mi, ...')
+    print('   包含上下八度音')
+    print(' =========================================================================\n')
+    
+    score = list(map(int, list(input('Enter the notion: '))))
+    beat = list(map(int, list(input('Enter the beats: '))))
+    if len(score) != len(beat):
+        print('ERROR !!!')
+    name = input('Enter the file name: ')
     getmusic(score, beat, name)
