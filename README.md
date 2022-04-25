@@ -7,7 +7,9 @@
 ![](https://i.imgur.com/ODuNKIy.jpg)
 
 * **score**:
+
     輸入要播出or儲存的音樂的簡譜。在 default condition 之中，`1` 代表 Do、`2` 代表 Re、`3` 代表 Mi，以此類推。
+
 * **beat**:
     輸入 score 中每個音符的拍子長度。在 default condition 之中，`1` 代表 1 拍、`2` 代表 2 拍，以此類推。
     另外，只能輸入整數，也就是說，如果有 1/4 拍的節奏出現，就要將所有拍子 * 4 來做輸入。
