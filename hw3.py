@@ -3,7 +3,7 @@ import wave
 import numpy as np
 import simpleaudio as sa
 
-def getmusic(score, beat, name, key, fs, unit_beat):
+def getmusic(score, beat, name, key=0, unit_beat=1, fs=44100):
     # Semitone p = 69 + 12*log(2, f/f0)
     p = [60, 62, 64, 65, 67, 69, 71, 72, 74, 76, \
             77, 79, 81, 83, 84, 86, 88, 89, 91, 93, 95, 96]
@@ -15,15 +15,35 @@ def getmusic(score, beat, name, key, fs, unit_beat):
     # Generation Music
     music = []
     for i in range(len(score)):
-        time = np.arange(0, beat[i] * unit_beat, fs * beat[i] * unit_beat)
-        f = freq[key] * pow(2, ((p[score[i]]-69) / 12))
-        x = np.sin(2 * np.pi * f * time)
-        music.append(x)
+        if beat[i] > 1:
+            for b in range(beat[i]):
+                t = np.linspace(0, 1, 1 * fs, False)
+                note = np.sin(freq[score[i]-1] * t * 2 * np.pi)
+                audio = note * (2**15 - 1) / np.max(np.abs(note))
+                audio = audio.astype(np.int16)
+                if b == 0: audio[:2050] = 0
+                elif b == beat[i]-1: audio[-4010:] = 0
+                music.append(audio)
+        else:
+            t = np.linspace(0, 1, fs, False)
+            note = np.sin(freq[score[i]-1] * t * 2 * np.pi)
+            audio = note * (2**15 - 1) / np.max(np.abs(note))
+            audio = audio.astype(np.int16)
+            audio[:2050] = 0
+            audio[-2050:] = 0
+            music.append(audio)
 
-    # Play Music
+    music = np.array(music)
+
     play_obj = sa.play_buffer(music, 1, 2, fs)
     play_obj.wait_done()
-    return
+
+    f = wave.open(name+'.wav', 'wb')
+    f.setnchannels(2)
+    f.setsampwidth(2)
+    f.setframerate(fs)
+    f.writeframes(music.tobytes())
+    f.close()
 
 if __name__ == '__main__':
     # =========================================================================
@@ -37,4 +57,4 @@ if __name__ == '__main__':
     score = [1, 1, 5, 5, 6, 6, 5]
     beat = [1, 1, 1, 1, 1, 1, 2]
     name = 'twinkle'
-    getmusic(score, beat, name, 0, 100, 1)
+    getmusic(score, beat, name)
