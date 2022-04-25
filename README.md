@@ -26,7 +26,7 @@
     
 * **unit_beat**: 
 
-    代表的每個拍子的時長。default unit_beat = 1 (sec)。
+    代表的每個拍子的時長。default unit_beat = 0.5 (sec)。
     
 * **volume**: 
 
@@ -35,5 +35,19 @@
 * **play**:
 
     如果希望執行檔案後會播出音樂，則輸入 `1`；反之則不要輸入。
+    
+## Demo
+
+* Basic Function:
+
+    只用 score、beat、name 三個參數，結果為輸出 `twinkle.wav`，並且從音檔可以聽出符合輸入的小星星簡譜。
+
+![](https://i.imgur.com/6aJm2Aj.png)
+
+* Advanced Function:
+
+    使用了所有參數，結果為輸出 `twinkle_2.wav`，從圖中可以看出有成功播放音樂 & 輸出音檔。另外，在聆聽音檔後，可以發現有符合輸入的將大調改成 D 大調，並且拉長每拍的長度，最後也有成功縮小音量。
+
+![](https://i.imgur.com/vVEZ4Rs.png)
 
 ###### tags: `Github`
