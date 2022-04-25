@@ -45,12 +45,12 @@ def getmusic(score, beat, name, key, unit_beat, volume, play):
     music = np.reshape(music, (music.shape[0]*music.shape[1], ))
 
     '''
-    '''
     # Sketch Plot
     time = np.arange(0, len(music)) * 1 / fs
     plt.plot(time, music)
     plt.show()
     plt.close()
+    '''
 
     # Play Music
     if play:
