@@ -14,7 +14,7 @@ def fading(X, order):
 
 def getmusic(score, beat, name, key, unit_beat, volume, play):
     # Base Frequency of Each Tone
-    fs = 96000
+    fs = 44100
     basis = np.array([261.63, 261.63*2**(1/6), 261.63*2**(1/3), 261.63*2**(5/12) \
                 , 261.63*2**(7/12), 261.63*2**(3/4), 261.63*2**(11/12), 261.63*2])
     keys = [1, 2**(1/6), 2**(1/3), 2**(5/12), 2**(7/12), 2**(3/4), 2**(11/12), 2]
@@ -45,12 +45,12 @@ def getmusic(score, beat, name, key, unit_beat, volume, play):
     music = np.reshape(music, (music.shape[0]*music.shape[1], ))
 
     '''
+    '''
     # Sketch Plot
-    time = np.arange(0, len(tmp)) # * 1 / fs
-    plt.plot(time, tmp)
+    time = np.arange(0, len(music)) * 1 / fs
+    plt.plot(time, music)
     plt.show()
     plt.close()
-    '''
 
     # Play Music
     if play:
