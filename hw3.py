@@ -89,7 +89,9 @@ if __name__ == '__main__':
 
     # Fool Proof
     if (not args.score or not args.beat) or len(args.score) != len(args.beat):
-        print('ERROR !!!')
+        print('ERROR !!! Something wrong with score or beat !!!')
+    elif args.volume and (float(args.volume) > 2 or float(args.volume) < 0):
+        print('ERROR !!! Something wrong with volume')
     else:
         # Data initialization
         score = list(map(int, list(args.score)))
