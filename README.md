@@ -4,7 +4,7 @@
 
 可以用 `python hw3.py --help` 指令來檢視程式所需的參數：
 
-![](https://i.imgur.com/ODuNKIy.jpg)
+![](https://i.imgur.com/ootFUlZ.jpg)
 
 * **score**:
 
@@ -24,9 +24,9 @@
     代表的是自然大調。`1` 代表的是 C major、`2` 代表的是 D major、`3` 代表的是 E major，以此類推。
     另外，default key = 1，如果有所更改的話，score 中的數字所代表的音階也會隨之更改。
     
-* **unit_beat**: 
+* **speed**: 
 
-    代表的每個拍子的時長。default unit_beat = 0.5 (sec)。
+    可以控制音樂播放的速度，但也會造成音調的些許變化。
     
 * **volume**: 
 
@@ -42,12 +42,12 @@
 
     只用 score、beat、name 三個參數，結果為輸出 `twinkle.wav`，並且從音檔可以聽出符合輸入的小星星簡譜。
 
-![](https://i.imgur.com/6aJm2Aj.png)
+![](https://i.imgur.com/IoyXsUL.jpg)
 
 * Advanced Function:
 
-    使用了所有參數，結果為輸出 `twinkle_2.wav`，從圖中可以看出有成功播放音樂 & 輸出音檔。另外，在聆聽音檔後，可以發現有符合輸入的將大調改成 D 大調，並且拉長每拍的長度，最後也有成功縮小音量。
+    使用了所有參數，結果為輸出 `twinkle_2.wav`，從圖中可以看出有成功播放音樂 & 輸出音檔。另外，在聆聽音檔後，可以發現有符合輸入的將大調改成 D 大調、加速音樂，並且成功縮小音量。
 
-![](https://i.imgur.com/vVEZ4Rs.png)
+![](https://i.imgur.com/HLiLLXX.jpg)
 
 ###### tags: `Github`
