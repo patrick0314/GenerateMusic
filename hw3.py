@@ -12,7 +12,7 @@ def fading(X, order):
     else: X[-n:] *= factor
     return X
 
-def getmusic(score, beat, name, key, unit_beat, volume, play):
+def getmusic(score, beat, name, key, speed, volume, play):
     # Base Frequency of Each Tone
     fs = 44100
     basis = np.array([261.63, 261.63*2**(1/6), 261.63*2**(1/3), 261.63*2**(5/12) \
@@ -25,7 +25,7 @@ def getmusic(score, beat, name, key, unit_beat, volume, play):
     for i in range(len(score)):
         if beat[i] > 1:
             for b in range(beat[i]):
-                t = np.linspace(0, unit_beat, unit_beat * fs, False)
+                t = np.linspace(0, 1, int((1 / speed) * fs), False)
                 f = basis[score[i]-1]
                 note = np.sin(f * t * 2 * np.pi)
                 audio = volume * 0.5 * note * (2**15 - 1) / np.max(np.abs(note))
@@ -33,7 +33,7 @@ def getmusic(score, beat, name, key, unit_beat, volume, play):
                 elif b == beat[i]-1: fading(audio, 0)
                 music.append(audio.astype(np.int16))
         else:
-            t = np.linspace(0, unit_beat, unit_beat * fs, False)
+            t = np.linspace(0, 1, int((1 / speed) * fs), False)
             f = basis[score[i]-1]
             note = np.sin(f * t * 2 * np.pi)
             audio = volume * 0.5 * note * (2**15 - 1) / np.max(np.abs(note))
@@ -85,7 +85,7 @@ if __name__ == '__main__':
     parser.add_argument('--name', help='Enter the name of the file of the music')
     parser.add_argument('--key', help='Enter the major of the music and will affect the score represenetation.\n \
         (1, 2, 3, 4, 5, 6, 7, 8) = (C, D, E, F, G, A, B, C)')
-    parser.add_argument('--unit_beat', help='Enter the sec per beat.')
+    parser.add_argument('--speed', help='Control the speed of the music.')
     parser.add_argument('--volume', help='Enter the factor of the basic volume. Range is from 0 to 2')
     parser.add_argument('--play', help='Determine whether play the music while executing the program. 1 for playing')
     args = parser.parse_args()
@@ -101,8 +101,8 @@ if __name__ == '__main__':
         beat = list(map(int, list(args.beat)))
         name = args.name
         key = int(args.key) if args.key else 1
-        unit_beat = int(args.unit_beat) if args.unit_beat else 1
+        spead = float(args.speed) if args.speed else 1
         volume = float(args.volume) if args.volume else 1
         play = 1 if args.play == '1' else 0
         
-        getmusic(score, beat, name, key=key, unit_beat=unit_beat, volume=volume, play=play)
+        getmusic(score, beat, name, key=key, speed=spead, volume=volume, play=play)
